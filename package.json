@@ -1,0 +1,23 @@
+{
+  "name": "sf_stories_mp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "weui-miniprogram": "^0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smithavt14/sf_stories_mp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smithavt14/sf_stories_mp/issues"
+  },
+  "homepage": "https://github.com/smithavt14/sf_stories_mp#readme"
+}

@@ -1,5 +1,6 @@
 .page__container {
   min-height: 100vh;
+  padding-top: 150rpx;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -9,7 +10,7 @@
 }
 
 .btn__area {
-  height: 150rpx;
+  height: 175rpx;
   width: 100%;
   display: flex;
   justify-content: space-around;

@@ -19,6 +19,7 @@
 }
 
 .content {
+  font-size: 32rpx;
   margin: 20rpx 0;
   font-family: serif;
   text-align: justify;
