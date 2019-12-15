@@ -1,0 +1,16 @@
+<view class="page__container">
+  
+  <!-- User information -->
+  <view class="user_container">
+    <view 
+    class="avatar" 
+    style="background-image: url({{user.avatar}})"></view>
+    
+    <view class="name">{{user.nickname}}</view>
+  </view>
+  
+  <!-- AUTH buttons -->
+  <button wx:if="{{!user}}" class="auth-btn" open-type="getUserInfo" type="primary" bindgetuserinfo="login">Login</button>
+
+  <button wx:else class="auth-btn" type="warn" bindtap="logout">Logout</button>
+</view>

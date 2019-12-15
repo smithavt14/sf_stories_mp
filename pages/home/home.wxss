@@ -1,0 +1,39 @@
+.story_container {
+  width: 90vw;
+  margin-bottom: 175rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: 800;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  margin: 20rpx;
+
+}
+
+.author {
+  font-size: 32rpx;
+  text-align: center;
+  margin: 10rpx;
+}
+
+.content {
+  margin: 20rpx 0;
+  font-family: serif;
+  text-align: justify;
+}
+
+.new-story-btn {
+  margin: 20rpx 0;
+}
+
+.btn__area .btn {
+  width: 40%;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+

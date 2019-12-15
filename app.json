@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "plugins": {
+    "sdkPlugin": {
+      "version": "3.3.0",
+      "provider": "wxc6b86e382a1e3294"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

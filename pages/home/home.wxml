@@ -1,0 +1,27 @@
+<view class="page__container" style="background: {{display.backgroundColor}}">
+  <!-- Story Information -->
+  <view class="story_container" style="color: {{display.color}}">
+    <view class="title">{{story.title}}</view>
+    <view class="author">{{story.author}}</view>
+    <view wx:for="{{story.content}}">
+      <view class="content">{{item}}</view>
+    </view>
+  </view>
+
+  <!-- New Story Btn -->
+  <view 
+  class="btn__area" 
+  style="background: {{display.backgroundColor}}">
+    <view 
+    class="btn" 
+    type="info" 
+    bindtap="getRandomStory" 
+    style="background: {{display.color}}; color: {{display.backgroundColor}}">New Story</view>
+
+    <view 
+    class="btn" 
+    bindtap="changeDisplay" 
+    style="background: {{display.color}}; color: {{display.backgroundColor}}">{{display.btn}}</view>
+  </view>
+
+</view>

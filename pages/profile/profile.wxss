@@ -1,0 +1,11 @@
+.auth-btn {
+  position: absolute;
+  bottom: 20rpx;
+}
+
+.avatar {
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50rpx;
+  margin: 20rpx;
+}
