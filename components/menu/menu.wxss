@@ -20,6 +20,12 @@
   border-bottom: 1px solid rgba(260,260,260,0.5);
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.menu__container  .container .icon {
+  height: 50rpx;
+  width: 50rpx;
 }
 
 .btn {

@@ -31,7 +31,12 @@
 <menu 
 wx:if="{{displayMenu}}" 
 display="{{display}}" 
+story="{{story}}"
+user="{{user}}"
 bind:toggleMenu="toggleMenu" 
-bind:changeDisplay="changeDisplay" 
+bind:toggleMode="toggleMode" 
 bind:getRandomStory="getRandomStory"
-bind:changeFontSize="changeFontSize"></menu>
+bind:changeFontSize="changeFontSize"
+bind:navigateToProfile="navigateToProfile"
+bind:addFavorite="addFavorite"
+bind:removeFavorite="removeFavorite"></menu>

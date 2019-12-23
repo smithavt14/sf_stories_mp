@@ -5,17 +5,36 @@
   
   <view 
   class="container" 
-  style="border-bottom-color: {{display.color}}">My Profile</view>
+  style="border-bottom-color: {{display.color}}"
+  bindtap="getRandomStory">New Story</view>
+
+  <view 
+  wx:if="{{story.isFavorite}}"
+  class="container" 
+  style="border-bottom-color: {{display.color}}"
+  bindtap="removeFavorite">
+    <view>Remove from Favorites</view>
+    <image class="icon" mode="aspectFit" src="/icons/{{display.mode}}_favorited.png"></image>
+  </view>
   
+  <view 
+  wx:else
+  class="container" 
+  style="border-bottom-color: {{display.color}}"
+  bindtap="addFavorite">
+    <view>Save to Favorites</view>
+    <image class="icon" mode="aspectFit" src="/icons/{{display.mode}}_not_favorited.png"></image>
+  </view>
+
   <view 
   class="container" 
   style="border-bottom-color: {{display.color}}"
-  bindtap="getRandomStory">New Story</view>
+  bindtap="navigateToProfile">My Profile</view>
   
   <view 
   class="container" 
   style="border-bottom-color: {{display.color}}" 
-  bindtap="changeDisplay">{{display.btn}}</view>
+  bindtap="toggleMode">{{display.btn}}</view>
 
   <view 
   class="container" 

@@ -1,20 +1,20 @@
 const getCurrentUser = () => {
   return new Promise(resolve => {
-    wx.BaaS.auth.getCurrentUser().then(user => {
-      console.log(user)
-      resolve(user)
-    }).catch(err => {
-      if (err.code === 604) {
-        console.log('用户未登录')
+    wx.getStorage({
+      key: 'user',
+      success: res => resolve(res.data),
+      fail: async err => {
+        wx.BaaS.auth.getCurrentUser().then(user => {
+          resolve(user)
+        })
       }
-      resolve(null)
     })
   })
 }
 
-const login = () => {
+const login = (data) => {
   return new Promise(resolve => {
-    wx.BaaS.auth.loginWithWechat().then(user => {
+    wx.BaaS.auth.loginWithWechat(data).then(user => {
       resolve(user)
     }, err => {
       console.log(err)

@@ -1,16 +1,45 @@
-<view class="page__container">
+<view class="page__container" style="background: {{display.backgroundColor}}; color: {{display.color}}">
   
-  <!-- User information -->
+  <!-- User Information -->
   <view class="user_container">
-    <view 
+    <image 
     class="avatar" 
-    style="background-image: url({{user.avatar}})"></view>
+    src="{{user.avatar}}" 
+    mode="aspectFill"></image>
     
     <view class="name">{{user.nickname}}</view>
   </view>
-  
-  <!-- AUTH buttons -->
-  <button wx:if="{{!user}}" class="auth-btn" open-type="getUserInfo" type="primary" bindgetuserinfo="login">Login</button>
 
-  <button wx:else class="auth-btn" type="warn" bindtap="logout">Logout</button>
+  <!-- Information Containers -->
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}">Favorites</view>
+  
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}">Total Reading Time</view>
+  
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}">Stories Fetched</view>
+
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}"
+  bindtap="navigateToHome">Continue Reading</view>
+
+  <view 
+  wx:if="{{user}}"
+  class="container" 
+  style="border-bottom-color: {{display.color}}"
+  bindtap="logout">Logout</view>
+  
+  <!-- Auth Buttons -->
+  <button 
+  wx:if="{{!user}}" 
+  type="primary" 
+  class="auth-btn" 
+  open-type="getUserInfo"
+  bindgetuserinfo="userInfoHandler">Login</button>
+
 </view>
