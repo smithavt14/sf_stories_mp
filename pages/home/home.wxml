@@ -1,27 +1,37 @@
-<view class="page__container" style="background: {{display.backgroundColor}}">
-  <!-- Story Information -->
-  <view class="story_container" style="color: {{display.color}}">
-    <view class="title">{{story.title}}</view>
-    <view class="author">{{story.author}}</view>
+<view class="page__container" style="background: {{display.backgroundColor}}; color: {{display.color}}">
+
+  <!-- Story Content -->
+  <view class="story_container" bindtap="onTap">
     <view wx:for="{{story.content}}">
-      <view class="content">{{item}}</view>
+      <view class="content" style="font-size: {{display.fontSize}}rpx">
+        {{item}}
+      </view>
     </view>
   </view>
 
-  <!-- New Story Btn -->
-  <view 
-  class="btn__area" 
-  style="background: {{display.backgroundColor}}">
-    <view 
-    class="btn" 
-    type="info" 
-    bindtap="getRandomStory" 
-    style="background: {{display.color}}; color: {{display.backgroundColor}}">New Story</view>
-
-    <view 
-    class="btn" 
-    bindtap="changeDisplay" 
-    style="background: {{display.color}}; color: {{display.backgroundColor}}">{{display.btn}}</view>
+  <!-- Story Info Area -->
+  <view
+  wx:if="{{displayInfo}}"
+  class="title__area" 
+  style="background: {{display.backgroundColor}}; color: {{display.color}}">
+    <view class="title">{{story.title}}</view>
+    <view class="author">{{story.author}}</view>
   </view>
 
 </view>
+
+<!-- Top Display Container -->
+<view wx:if="{{!displayMenu && displayInfo && story}}" class="top_container" style="background: {{display.backgroundColor}}; color: {{display.color}}">
+  <view class="menu-btn" bindtap="toggleMenu" style="color: {{display.color}}">Menu</view>
+
+  <view class="speed-info" style="color: {{display.color}}">{{story.readSpeed}} minutes</view>
+</view>
+
+<!-- Menu Component -->
+<menu 
+wx:if="{{displayMenu}}" 
+display="{{display}}" 
+bind:toggleMenu="toggleMenu" 
+bind:changeDisplay="changeDisplay" 
+bind:getRandomStory="getRandomStory"
+bind:changeFontSize="changeFontSize"></menu>

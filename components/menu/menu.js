@@ -1,10 +1,21 @@
 Component({
   properties: {
-    innerText: {
-      type: String,
-      value: 'default value',
+    display: {
+      type: Object,
     }
   },
-  data: {},
-  methods: {},
+  methods: {
+    toggleMenu: function() {
+      this.triggerEvent('toggleMenu')
+    },
+    changeDisplay: function() {
+      this.triggerEvent('changeDisplay')
+    },
+    getRandomStory: function() {
+      this.triggerEvent('getRandomStory')
+    }, 
+    changeFontSize: function(event) {
+      this.triggerEvent('changeFontSize', event)
+    }
+  },
 })

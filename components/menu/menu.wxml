@@ -1,1 +1,37 @@
-<view class="menu__container"></view>
+<view class="menu__container" style="color: {{display.color}}; background: {{display.backgroundColor}}">
+  <view 
+  class="btn" 
+  bindtap="toggleMenu">Resume</view>
+  
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}">My Profile</view>
+  
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}"
+  bindtap="getRandomStory">New Story</view>
+  
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}" 
+  bindtap="changeDisplay">{{display.btn}}</view>
+
+  <view 
+  class="container" 
+  style="border-bottom-color: {{display.color}}">
+    <view>Font Size</view>
+    <view class="slider_container">
+      <slider 
+      bindchange="changeFontSize"
+      min="20"
+      max="60"
+      backgroundColor="#D9D6D6"
+      activeColor="{{display.color}}"
+      block-color="{{display.color}}"
+      block-size="20"
+      value="{{display.fontSize}}" 
+      show-value/>
+    </view>
+  </view>
+</view>
