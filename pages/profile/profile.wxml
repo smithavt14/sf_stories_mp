@@ -11,28 +11,30 @@
   </view>
 
   <!-- Information Containers -->
-  <view 
-  class="container" 
-  style="border-bottom-color: {{display.color}}">Favorites</view>
-  
-  <view 
-  class="container" 
-  style="border-bottom-color: {{display.color}}">Total Reading Time</view>
-  
-  <view 
-  class="container" 
-  style="border-bottom-color: {{display.color}}">Stories Fetched</view>
+  <block wx:if="{{user}}">
+    <view
+    class="container" 
+    style="border-bottom-color: {{display.color}}">Favorites</view>
+    
+    <view 
+    class="container" 
+    style="border-bottom-color: {{display.color}}">Total Reading Time</view>
+    
+    <view 
+    class="container" 
+    style="border-bottom-color: {{display.color}}">Stories Fetched</view>
 
-  <view 
-  class="container" 
-  style="border-bottom-color: {{display.color}}"
-  bindtap="navigateToHome">Continue Reading</view>
+    <view 
+    class="container" 
+    style="border-bottom-color: {{display.color}}"
+    bindtap="navigateToHome">Continue Reading</view>
 
-  <view 
-  wx:if="{{user}}"
-  class="container" 
-  style="border-bottom-color: {{display.color}}"
-  bindtap="logout">Logout</view>
+    <view 
+    wx:if="{{user}}"
+    class="container" 
+    style="border-bottom-color: {{display.color}}"
+    bindtap="logout">Logout</view>
+  </block>
   
   <!-- Auth Buttons -->
   <button 

@@ -54,12 +54,14 @@ Page({
     _story.random().then(async story => {
 
       story = await _story.setReadSpeed(story)
-      let favorite = await _favorite.query(user, story)
-      
-      if (favorite) {
-        story['isFavorite'] = story.id === favorite.story.id
-      }
+      if (user) {
+        let favorite = await _favorite.query(user, story)
 
+        if (favorite) {
+          story['isFavorite'] = story.id === favorite.story.id
+        }
+      } else story['isFavorite'] = false
+      
       wx.hideLoading()
       this.setData({ story, displayMenu: false })
     })
@@ -105,6 +107,18 @@ Page({
     })
   },
 
+  fetchFavorites: async function () {
+    let user = this.data.user
+    await _favorite.fetch(user).then(favorites => {
+      user['favorites'] = favorites
+      this.setData({user})
+    })
+  },
+
+  queryFavorites: async function () {
+
+  },
+
   // ----- Navigation Functions -----
 
   navigateToProfile: function () {
@@ -120,11 +134,13 @@ Page({
   getCurrentUser: function () {
     return new Promise(async resolve => {
       await _auth.getCurrentUser().then(async user => {
-        await _favorite.fetch(user).then(favorites => {
-          user['favorites'] = favorites
-          this.setData({ user })
-          resolve(user)
-        })
+        if (user) {
+          await _favorite.fetch(user).then(favorites => {
+            user['favorites'] = favorites
+            this.setData({ user })
+            resolve(user)
+          })
+        } else resolve(undefined)
       })
     })
   },

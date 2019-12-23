@@ -25,6 +25,7 @@ const login = (data) => {
 
 const logout = () => {
   wx.BaaS.auth.logout()
+  wx.setStorageSync('user', undefined)
 }
 
 module.exports = {getCurrentUser, login, logout}

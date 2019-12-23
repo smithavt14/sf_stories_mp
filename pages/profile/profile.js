@@ -18,9 +18,12 @@ Page({
   
   // ----- Auth Functions -----
   userInfoHandler: async function (data) {
+    wx.showLoading({ title: 'Logging in...' })
     await _auth.login(data).then(user => {
       if (user) {
         wx.setStorageSync('user', user)
+        
+        wx.hideLoading()
         this.setData({ user })
       }
     })
