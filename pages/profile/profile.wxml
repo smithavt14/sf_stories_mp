@@ -22,7 +22,7 @@
     
     <view 
     class="container" 
-    style="border-bottom-color: {{display.color}}">Stories Fetched</view>
+    style="border-bottom-color: {{display.color}}">Community Favorites</view>
 
     <view 
     class="container" 

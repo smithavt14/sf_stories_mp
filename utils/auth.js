@@ -1,14 +1,16 @@
 const getCurrentUser = () => {
   return new Promise(resolve => {
-    wx.getStorage({
-      key: 'user',
-      success: res => resolve(res.data),
-      fail: async err => {
-        wx.BaaS.auth.getCurrentUser().then(user => {
-          resolve(user)
-        })
-      }
-    })
+    try {
+      let user = wx.getStorageSync('user')
+      resolve(user)
+    } catch (e) {
+      wx.BaaS.auth.getCurrentUser().then((user) => {
+        console.log(user)
+        resolve(user)
+      })
+    } finally {
+      resolve()
+    }
   })
 }
 

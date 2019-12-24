@@ -30,33 +30,7 @@ const setReadSpeed = (story) => {
   })
 }
 
-const createFavorite = (story, user) => {
-  return new Promise(resolve => {
-    let Favorite = new wx.BaaS.TableObject('favorites')
-    let favorite = Favorite.create()
-    let pointers = { user: user.id, story: story.id }
-
-    favorite.set(pointers).save().then(res => {
-      console.log(res)
-      resolve(res)
-    })
-  })
-}
-
-const deleteFavorite = (favorite) => {
-  return new Promise(resolve => {
-    let Favorite = new wx.BaaS.TableObject('favorites')
-    Favorite.delete(favorite.id).then(res => {
-      console.log(res)
-      resolve(res)
-    }, err => {
-      console.log(err)
-      resolve(err)
-    })
-  })
-}
-
-module.exports = { random, setReadSpeed, createFavorite, deleteFavorite }
+module.exports = { random, setReadSpeed }
 
 /* ----- Notes ----- 
 

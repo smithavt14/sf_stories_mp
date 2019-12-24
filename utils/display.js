@@ -17,13 +17,18 @@ const lightMode = {
 
 // ----- Functions ----- //
 const fetch = () => {
-  return new Promise(resolve => {
-    wx.getStorage({
-      key: 'display',
-      success: display => resolve(display.data),
-      fail: err => update(lightMode)
+  return new Promise(async resolve => {
+      wx.getStorage({
+        key: 'display',
+        success (res) { resolve(res.data) }, 
+        fail (err) { 
+          wx.setStorageSync('display', lightMode)
+          resolve(lightMode)
+         }
+      })
     })
-  })
+      // let display = await update(lightMode)
+      // resolve(display)
 }
 
 const toggleMode = (display) => {
@@ -43,11 +48,8 @@ const toggleMode = (display) => {
 
 const update = (display) => {
   return new Promise(resolve => {
-    wx.setStorage({
-      key: 'display',
-      data: display,
-      success: display => resolve(fetch())
-    })
+    wx.setStorageSync('display', display)
+    resolve(display)
   })
 }
 
