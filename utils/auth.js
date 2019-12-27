@@ -1,15 +1,13 @@
 const getCurrentUser = () => {
   return new Promise(resolve => {
-    try {
-      let user = wx.getStorageSync('user')
-      resolve(user)
-    } catch (e) {
+    let user = wx.getStorageSync('user')
+    if (user) { resolve(user) } 
+    else {
       wx.BaaS.auth.getCurrentUser().then((user) => {
         console.log(user)
+        wx.setStorageSync('user', user)
         resolve(user)
       })
-    } finally {
-      resolve()
     }
   })
 }
@@ -17,6 +15,7 @@ const getCurrentUser = () => {
 const login = (data) => {
   return new Promise(resolve => {
     wx.BaaS.auth.loginWithWechat(data).then(user => {
+      wx.setStorageSync('user', user)
       resolve(user)
     }, err => {
       console.log(err)
