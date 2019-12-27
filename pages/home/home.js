@@ -66,6 +66,24 @@ Page({
     })
   },
 
+  fetchStoryWithId: async function (id) {
+    wx.showLoading({title: 'Fetching...'})
+
+    let user = this.data.user
+    
+    _story.fetchWithId(id).then(async story => {
+      story = await _story.setReadSpeed(story)
+
+      if (user) {
+        let favorite = await _favorite.query(user, story) // (3)
+        story['isFavorite'] = !!favorite
+      } 
+      
+      wx.hideLoading()
+      this.setData({ story, displayMenu: false }) // (4)
+    })
+  },
+
   // ----- Favorite Functions -----
 
   addFavorite: async function () {    
@@ -125,7 +143,11 @@ Page({
     wx.navigateTo({
       url: '/pages/profile/profile',
       success: () => this.setData({ displayMenu: false }), // (9)
-      fail: err => console.log('navigation error -->', err)
+      events: {
+        receiveStoryId: function (id) {
+          console.log('Return to Home --> ', id)
+        }
+      }, 
     })
   },
 
@@ -147,15 +169,26 @@ Page({
 
   // ----- LifeCycle Functions -----
   
-  onLoad: function () {},
-
-  onShow: async function () {
-    let story = this.data.story
-
-    await this.getCurrentUser().then(user => {
-      if (!story) this.getRandomStory({user})
-    })
+  onLoad: async function (options) {
     this.fetchDisplay()
+
+    if (options.id) {
+      let id = options.id
+
+      await this.getCurrentUser().then(user => {
+        this.fetchStoryWithId(id)
+      })
+    } else {
+      let story = this.data.story
+      
+      await this.getCurrentUser().then(user => {
+        if (!story) this.getRandomStory({user})
+      })
+    }
+  }, 
+
+  onShow: function () {
+    this.getCurrentUser()
   }
 })
 

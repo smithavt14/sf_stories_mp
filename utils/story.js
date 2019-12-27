@@ -30,7 +30,44 @@ const setReadSpeed = (story) => {
   })
 }
 
-module.exports = { random, setReadSpeed }
+const queryAll = (user) => {
+  return new Promise(resolve => {
+    let favorites = user.favorites
+    let storyIdArray = favorites.map((item) => item.story.id)
+    
+    let query = new wx.BaaS.Query()
+    let Stories = new wx.BaaS.TableObject('stories')
+  
+    query.in('id', storyIdArray)
+  
+    Stories.setQuery(query).limit(100).find().then(res => {
+      let stories = res.data.objects
+      resolve(stories)
+    }, err => {
+      console.log(err)
+      resolve(undefined)
+    })
+  })
+}
+
+const fetchWithId = (id) => {
+  return new Promise(resolve => {
+    let query = new wx.BaaS.Query()
+    let Story = new wx.BaaS.TableObject('stories')
+
+    query.compare('id', '=', id)
+
+    Story.setQuery(query).find().then(res => {
+      let story = res.data.objects[0]
+      story.content = story.content.split('/n')
+      resolve(story)
+    }, err => {
+      resolve(err)
+    })
+  })
+}
+
+module.exports = { random, setReadSpeed, queryAll, fetchWithId }
 
 /* ----- Notes ----- 
 

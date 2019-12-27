@@ -14,7 +14,8 @@
   <block wx:if="{{user}}">
     <view
     class="container" 
-    style="border-bottom-color: {{display.color}}">Favorites</view>
+    style="border-bottom-color: {{display.color}}"
+    bindtap="navigateToFavorites">Favorites</view>
     
     <view 
     class="container" 

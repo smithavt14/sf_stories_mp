@@ -1,0 +1,19 @@
+<view 
+class="page__container" 
+style="background: {{display.backgroundColor}}; color: {{display.color}}; padding-bottom: 100rpx;">
+  
+  <!-- Information Containers -->
+  <block wx:for="{{stories}}">
+    <view
+    class="container" 
+    style="border-bottom-color: {{display.color}}"
+    bindtap="navigateToStory"
+    data-id="{{item.id}}">
+      <view style="flex-grow: 1">
+        <view class="title">{{ item.title }}</view>
+        <view class="author">{{ item.author }}</view>
+      </view>
+    </view>
+  </block>
+
+</view>

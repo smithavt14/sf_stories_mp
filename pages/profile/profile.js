@@ -15,6 +15,12 @@ Page({
   navigateToHome: function () {
     wx.navigateBack({delta: 2})
   },
+
+  navigateToFavorites: function () {
+    wx.navigateTo({
+      url: '/pages/favorites/favorites'
+    })
+  },
   
   // ----- Auth Functions -----
   userInfoHandler: async function (data) {

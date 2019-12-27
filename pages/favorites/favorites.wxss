@@ -1,0 +1,21 @@
+.container {
+  height: 200rpx;
+  width: 90%;
+  border-bottom: 1px solid rgba(260,260,260,0.5);
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.container .title {
+  width: 90%;
+  font-size: 40rpx;
+  font-weight: 800;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: 10rpx;
+}
+
+.container .author {
+  width: 90%;
+  font-size: 32rpx;
+}
