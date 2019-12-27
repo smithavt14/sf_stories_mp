@@ -9,7 +9,7 @@
   bindtap="getRandomStory">New Story</view>
 
   <view 
-  wx:if="{{story.isFavorite}}"
+  wx:if="{{user && story.isFavorite}}"
   class="container" 
   style="border-bottom-color: {{display.color}}"
   bindtap="removeFavorite">
@@ -18,12 +18,20 @@
   </view>
   
   <view 
-  wx:else
+  wx:if="{{ user && !story.isFavorite}}"
   class="container" 
   style="border-bottom-color: {{display.color}}"
   bindtap="addFavorite">
     <view>Save to Favorites</view>
     <image class="icon" mode="aspectFit" src="/icons/{{display.mode}}_not_favorited.png"></image>
+  </view>
+
+  <view 
+  wx:if="{{!user}}"
+  class="container" 
+  style="border-bottom-color: {{display.color}}"
+  bindtap="navigateToProfile">
+    <view>Login to Add to Favorites</view>
   </view>
 
   <view 

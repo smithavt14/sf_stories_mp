@@ -7,12 +7,13 @@ Page({
   data: {
     displayMenu: false,
     displayInfo: true
-  },
+    // (1)
+  }, 
 
   // ----- Display Functions -----
 
   fetchDisplay: async function () {
-    let display = await _display.fetch()
+    let display = await _display.fetch() // (2)
     
     this.setData({ display })
   },
@@ -46,24 +47,22 @@ Page({
 
   // ----- Story Functions -----
 
-  getRandomStory: async function () {
+  getRandomStory: async function (attrs = {}) {
     wx.showLoading({title: 'Fetching...'})
-
-    let user = await this.getCurrentUser()
     
+    let user = attrs.user ? attrs.user : this.data.user
+
     _story.random().then(async story => {
 
       story = await _story.setReadSpeed(story)
-      if (user) {
-        let favorite = await _favorite.query(user, story)
 
-        if (favorite) {
-          story['isFavorite'] = story.id === favorite.story.id
-        }
-      } else story['isFavorite'] = false
+      if (user) {
+        let favorite = await _favorite.query(user, story) // (3)
+        story['isFavorite'] = !!favorite
+      } 
       
       wx.hideLoading()
-      this.setData({ story, displayMenu: false })
+      this.setData({ story, displayMenu: false }) // (4)
     })
   },
 
@@ -74,18 +73,20 @@ Page({
 
     let user = this.data.user
     let story = this.data.story
-    
-    await _favorite.add(user, story).then(async res => {
-      user['favorites'] = await _favorite.fetch(user)
-      let favorite = await _favorite.query(user, story)
 
-      if (favorite) {
-        story['isFavorite'] = story.id === favorite.story.id
-      }
-
-      wx.hideLoading()
-      this.setData({ story, user })
-    })
+    if (user && story) {
+      await _favorite.add(user, story).then(async res => {
+        user['favorites'] = await _favorite.fetch(user) // (5)
+        
+        let favorite = await _favorite.query(user, story) // (6)
+        story['isFavorite'] = !!favorite // (7)
+        
+        wx.hideLoading()
+        this.setData({ story, user })
+      })
+    } else {
+      wx.showToast({title: 'Please Login'})
+    }
   },
 
   removeFavorite: async function () {
@@ -96,27 +97,26 @@ Page({
 
     let favorite = await _favorite.query(user, story)
 
-    await _favorite.remove(favorite).then(async res => {
-      user['favorites'] = await _favorite.fetch(user)
-      let favorite = await _favorite.query(user, story)
-
-      story['isFavorite'] = !!favorite
-      
-      wx.hideLoading()
-      this.setData({ story, user })
-    })
+    if (user && story && favorite) {
+      await _favorite.remove(favorite).then(async res => {
+        user['favorites'] = await _favorite.fetch(user) // (5)
+        
+        let favorite = await _favorite.query(user, story) // (6)
+        story['isFavorite'] = !!favorite // (7)
+        
+        wx.hideLoading()
+        this.setData({ story, user })
+      })
+    }
   },
 
   fetchFavorites: async function () {
     let user = this.data.user
+    
     await _favorite.fetch(user).then(favorites => {
-      user['favorites'] = favorites
+      user['favorites'] = favorites // (8)
       this.setData({user})
     })
-  },
-
-  queryFavorites: async function () {
-
   },
 
   // ----- Navigation Functions -----
@@ -124,7 +124,7 @@ Page({
   navigateToProfile: function () {
     wx.navigateTo({
       url: '/pages/profile/profile',
-      success: () => this.setData({ displayMenu: false }),
+      success: () => this.setData({ displayMenu: false }), // (9)
       fail: err => console.log('navigation error -->', err)
     })
   },
@@ -147,8 +147,35 @@ Page({
 
   // ----- LifeCycle Functions -----
   
-  onLoad: function () {
-    this.getRandomStory()
+  onLoad: function () {},
+
+  onShow: async function () {
+    let story = this.data.story
+
+    await this.getCurrentUser().then(user => {
+      if (!story) this.getRandomStory({user})
+    })
     this.fetchDisplay()
   }
 })
+
+/* ----- Notes -----
+1. Data should have the following objects: user, story, display
+
+2. If no 'mode' is found in storage, default is 'lightMode'
+
+3. If the user is present, determine whether or not current story is included in the user's favorites
+
+4. Menu is default 'hidden' whenever a new story is fetched
+
+5. Returns an array of 'Favorite' objects which include both story and user IDs  
+
+6. If user.favorites includes current story ID, return the related favorite object
+
+7. Sets isFavorite to a boolean 
+
+8. Returns an array of Favorite objects
+
+9. On return from pages/profile/profile, hide menu
+
+*/

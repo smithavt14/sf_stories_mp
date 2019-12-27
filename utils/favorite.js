@@ -5,10 +5,11 @@ const fetch = (user) => {
     query.compare('user', '=', user.id)
 
     let Favorite = new wx.BaaS.TableObject('favorites')
-    Favorite.setQuery(query).find().then(res => {
+    Favorite.setQuery(query).limit(100).find().then(res => {
       resolve(res.data.objects)
     }, err => {
       console.log(err)
+      resolve(null)
     })
   })
 }
@@ -53,8 +54,8 @@ const query = async (user, story) => {
           resolve(favorite)
         }
       })
-      resolve(undefined)
-    } else resolve(undefined)
+      resolve(null)
+    } else resolve(null)
   })
 }
 

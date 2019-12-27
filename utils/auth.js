@@ -7,6 +7,11 @@ const getCurrentUser = () => {
         console.log(user)
         wx.setStorageSync('user', user)
         resolve(user)
+      }).catch(err => {
+        if ( err.code === 604 ) { 
+          console.log('用户未登录') 
+          resolve(null)
+        }
       })
     }
   })
