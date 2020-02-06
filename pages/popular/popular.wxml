@@ -1,6 +1,6 @@
 <view 
 class="page__container" 
-style="background: {{display.backgroundColor}}; color: {{display.color}}; padding-bottom: 100rpx; padding-top: 200rpx">
+style="background: {{display.backgroundColor}}; color: {{display.color}}; padding-bottom: 100rpx; padding-top: 200rpx;">
   
   <!-- Information Containers -->
   <block wx:for="{{stories}}">
@@ -10,7 +10,7 @@ style="background: {{display.backgroundColor}}; color: {{display.color}}; paddin
     bindtap="navigateToStory"
     data-id="{{item.id}}">
       <view style="flex-grow: 1">
-        <view class="title">{{ item.title }}</view>
+        <view class="title">{{index + 1}}. {{ item.title }}</view>
         <view class="author">{{ item.author }}</view>
       </view>
     </view>

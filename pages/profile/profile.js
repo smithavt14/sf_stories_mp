@@ -21,6 +21,12 @@ Page({
       url: '/pages/favorites/favorites'
     })
   },
+
+  navigateToPopular: function () {
+    wx.navigateTo({
+      url: '/pages/popular/popular'
+    })
+  },
   
   // ----- Auth Functions -----
   userInfoHandler: async function (data) {

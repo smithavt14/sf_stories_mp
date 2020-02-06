@@ -29,3 +29,26 @@
   align-items: center;
   margin: 80rpx 0;
 }
+
+.top_container {
+  width: 100vw;
+  height: 200rpx;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+.menu-btn {
+  height: 100rpx;
+  width: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 600;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+}

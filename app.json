@@ -2,7 +2,8 @@
   "pages": [
     "pages/home/home",
     "pages/profile/profile",
-    "pages/favorites/favorites"
+    "pages/favorites/favorites",
+    "pages/popular/popular"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,7 +1,7 @@
 const random = () => {
   return new Promise(resolve => {
     let query = new wx.BaaS.Query()
-    let Story = new wx.BaaS.TableObject('stories')
+    let Story = new wx.BaaS.TableObject('story')
     let num = Math.ceil(Math.random() * 260) /* (1) */
 
     query.compare('index', '=', num)
@@ -36,7 +36,7 @@ const queryAll = (user) => {
     let storyIdArray = favorites.map((item) => item.story.id)
     
     let query = new wx.BaaS.Query()
-    let Stories = new wx.BaaS.TableObject('stories')
+    let Stories = new wx.BaaS.TableObject('story')
   
     query.in('id', storyIdArray)
   
@@ -50,10 +50,27 @@ const queryAll = (user) => {
   })
 }
 
+const queryPopular = () => {
+  return new Promise(resolve => {
+    let query = new wx.BaaS.Query()
+    let Story = new wx.BaaS.TableObject('story')
+
+    query.compare('favorite_num', '>', 0)
+    
+    Story.setQuery(query).orderBy('favorite_num').limit(10).find().then(res => {
+      let stories = res.data.objects
+      resolve(stories)
+    }, err => {
+      console.log(err)
+      resolve(undefined)
+    })
+  })
+}
+
 const fetchWithId = (id) => {
   return new Promise(resolve => {
     let query = new wx.BaaS.Query()
-    let Story = new wx.BaaS.TableObject('stories')
+    let Story = new wx.BaaS.TableObject('story')
 
     query.compare('id', '=', id)
 
@@ -67,7 +84,26 @@ const fetchWithId = (id) => {
   })
 }
 
-module.exports = { random, setReadSpeed, queryAll, fetchWithId }
+const varyFavorites = (story, operation) => {
+  return new Promise(resolve => {
+
+    let num = story.favorite_num
+    let Stories = new wx.BaaS.TableObject('story')
+    story = Stories.getWithoutData(story.id)
+
+    num = operation === 'add' ? num + 1 : num - 1
+
+    story.set('favorite_num', num)
+    story.update().then(res => {
+      console.log(res)
+      resolve(res)
+    }, err => {
+      console.log(err)
+    })
+  })
+}
+
+module.exports = { random, setReadSpeed, queryAll, fetchWithId, varyFavorites, queryPopular }
 
 /* ----- Notes ----- 
 

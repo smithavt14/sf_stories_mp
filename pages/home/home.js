@@ -94,6 +94,8 @@ Page({
 
     if (user && story) {
       await _favorite.add(user, story).then(async res => {
+        await _story.varyFavorites(story, 'add') // (10)
+
         user['favorites'] = await _favorite.fetch(user) // (5)
         
         let favorite = await _favorite.query(user, story) // (6)
@@ -117,6 +119,8 @@ Page({
 
     if (user && story && favorite) {
       await _favorite.remove(favorite).then(async res => {
+        await _story.varyFavorites(story, 'subtract') // (10)
+
         user['favorites'] = await _favorite.fetch(user) // (5)
         
         let favorite = await _favorite.query(user, story) // (6)
@@ -185,10 +189,19 @@ Page({
         if (!story) this.getRandomStory({user})
       })
     }
-  }, 
+  },
 
   onShow: function () {
     this.getCurrentUser()
+  },
+
+  onShareAppMessage: function (res) {
+    let story = this.data.story
+
+    return {
+      title: `${story.title}`,
+      path: `/pages/home/home?id=${story.id}`
+    }
   }
 })
 
@@ -210,5 +223,7 @@ Page({
 8. Returns an array of Favorite objects
 
 9. On return from pages/profile/profile, hide menu
+
+10. Increase the num_favorites for the selected story
 
 */

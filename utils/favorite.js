@@ -4,7 +4,7 @@ const fetch = (user) => {
 
     query.compare('user', '=', user.id)
 
-    let Favorite = new wx.BaaS.TableObject('favorites')
+    let Favorite = new wx.BaaS.TableObject('favorite')
     Favorite.setQuery(query).limit(100).find().then(res => {
       resolve(res.data.objects)
     }, err => {
@@ -16,7 +16,7 @@ const fetch = (user) => {
 
 const add = (user, story) => {
   return new Promise(resolve => {
-    let Favorite = new wx.BaaS.TableObject('favorites')
+    let Favorite = new wx.BaaS.TableObject('favorite')
     let favorite = Favorite.create()
 
     let fields = {
@@ -34,7 +34,7 @@ const add = (user, story) => {
 
 const remove = (favorite) => {
   return new Promise(resolve => {
-    let Favorite = new wx.BaaS.TableObject('favorites')
+    let Favorite = new wx.BaaS.TableObject('favorite')
     Favorite.delete(favorite.id).then(res => {
       resolve(res)
     }, err => {

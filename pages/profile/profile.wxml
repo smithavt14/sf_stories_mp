@@ -23,7 +23,8 @@
     
     <view 
     class="container" 
-    style="border-bottom-color: {{display.color}}">Community Favorites</view>
+    style="border-bottom-color: {{display.color}}"
+    bindtap="navigateToPopular">Community Favorites</view>
 
     <view 
     class="container" 
@@ -36,6 +37,12 @@
     style="border-bottom-color: {{display.color}}"
     bindtap="logout">Logout</view>
   </block>
+
+  <!-- Top Back Button -->
+  <view 
+  class="menu-btn" 
+  bindtap="navigateToHome" 
+  style="color: {{display.color}}">Back</view>
   
   <!-- Auth Buttons -->
   <button 

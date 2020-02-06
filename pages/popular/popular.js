@@ -7,9 +7,9 @@ Page({
   data: {},
 
   // ----- Story Functions -----
-  getAllStories: async function (user) {
+  getAllPopular: async function (user) {
     wx.showLoading({title: 'Fetching...'})
-    let stories = await _story.queryAll(user)
+    let stories = await _story.queryPopular(user)
     
     wx.hideLoading()
     this.setData({ stories })
@@ -53,7 +53,7 @@ Page({
   onShow: function () {
     this.fetchDisplay()
     this.getCurrentUser().then((user) => {
-      if (user) this.getAllStories(user)
+      if (user) this.getAllPopular(user)
     })
   }
 })
