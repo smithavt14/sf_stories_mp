@@ -94,7 +94,7 @@ Page({
 
     if (user && story) {
       await _favorite.add(user, story).then(async res => {
-        await _story.varyFavorites(story, 'add') // (10)
+        story = await _story.varyFavorites(story, 'add') // (10)
 
         user['favorites'] = await _favorite.fetch(user) // (5)
         
@@ -119,11 +119,12 @@ Page({
 
     if (user && story && favorite) {
       await _favorite.remove(favorite).then(async res => {
-        await _story.varyFavorites(story, 'subtract') // (10)
+        story = await _story.varyFavorites(story, 'subtract') // (10)
 
         user['favorites'] = await _favorite.fetch(user) // (5)
         
         let favorite = await _favorite.query(user, story) // (6)
+        
         story['isFavorite'] = !!favorite // (7)
         
         wx.hideLoading()

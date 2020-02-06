@@ -86,20 +86,23 @@ const fetchWithId = (id) => {
 
 const varyFavorites = (story, operation) => {
   return new Promise(resolve => {
-
     let num = story.favorite_num
+
     let Stories = new wx.BaaS.TableObject('story')
     story = Stories.getWithoutData(story.id)
 
     num = operation === 'add' ? num + 1 : num - 1
 
-    story.set('favorite_num', num)
-    story.update().then(res => {
-      console.log(res)
-      resolve(res)
-    }, err => {
-      console.log(err)
-    })
+    if (num >= 0) {
+      story.set('favorite_num', num)
+      story.update().then(res => {
+        story = res.data
+        story.content = story.content.split('/n')
+        resolve(story)
+      }, err => {
+        console.log(err)
+      })
+    }
   })
 }
 
