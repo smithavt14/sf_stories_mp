@@ -16,7 +16,7 @@
   style="background: {{display.backgroundColor}}; color: {{display.color}}">
     <view wx:if="{{ display.fontContainer }}" class="font__container">
       <view class="slider_container">
-        <slider bindchange="changeFontSize" min="20" max="60" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
+        <slider bindchange="changeFontSize" min="32" max="56" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
       </view>
     </view>
     <view class="btn__container">
