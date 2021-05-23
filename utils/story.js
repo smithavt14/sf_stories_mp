@@ -1,15 +1,15 @@
 const random = () => {
   return new Promise(resolve => {
-    let query = new wx.BaaS.Query()
-    let Story = new wx.BaaS.TableObject('story')
-    let num = Math.ceil(Math.random() * 260) /* (1) */
+    let query = new wx.BaaS.Query();
+    let Story = new wx.BaaS.TableObject('story');
+    let num = Math.ceil(Math.random() * 260);
 
-    query.compare('index', '=', num)
+    query.compare('index', '=', num);
 
     Story.setQuery(query).find().then(res => {
-      let story = res.data.objects[0]
-      story.content = story.content.split('/n')
-      resolve(story)
+      let story = res.data.objects[0];
+      story.content = story.content.split('/n');
+      resolve(story);
     }, err => {
       resolve(err)
     })
@@ -95,9 +95,10 @@ const varyFavorites = (story, operation) => {
 
     if (num >= 0) {
       story.set('favorite_num', num)
-      story.update().then(res => {
+      story.update().then(async res => {
         story = res.data
         story.content = story.content.split('/n')
+        story = await setReadSpeed(story)
         resolve(story)
       }, err => {
         console.log(err)

@@ -19,3 +19,11 @@
   position: fixed;
   bottom: 0;
 }
+
+.flex {
+  display: flex;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}

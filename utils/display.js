@@ -18,39 +18,29 @@ const lightMode = {
 // ----- Functions ----- //
 const fetch = () => {
   return new Promise(async resolve => {
-      wx.getStorage({
-        key: 'display',
-        success (res) { resolve(res.data) }, 
-        fail (err) { 
-          wx.setStorageSync('display', lightMode)
-          resolve(lightMode)
-         }
-      })
-    })
-      // let display = await update(lightMode)
-      // resolve(display)
+    let display = wx.getStorageSync('display');
+    if (display) resolve(display);
+    else {
+      wx.setStorageSync('display', lightMode);
+      resolve(lightMode);
+    }
+  })
 }
 
 const toggleMode = (display) => {
-  return new Promise(resolve => {
-    let fontSize = display.fontSize
+  let fontSize = display.fontSize
 
-    display = display.mode === 'light' ? darkMode : lightMode
-    display.fontSize = fontSize
+  display = display.mode === 'light' ? darkMode : lightMode
+  display.fontSize = fontSize
 
-    wx.setStorage({
-      key: 'display',
-      data: display,
-      success: res => resolve(fetch())
-    })
-  })
+  wx.setStorageSync('display', display);
+
+  return(display);
 }
 
 const update = (display) => {
-  return new Promise(resolve => {
-    wx.setStorageSync('display', display)
-    resolve(display)
-  })
+  wx.setStorageSync('display', display)
+  return(display);
 }
 
 module.exports = { fetch, toggleMode, update }

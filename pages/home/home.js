@@ -14,23 +14,21 @@ Page({
 
   fetchDisplay: async function () {
     let display = await _display.fetch() // (2)
-    
     this.setData({ display })
   },
 
-  toggleMode: async function (e) {
-    let display = this.data.display
-    display = await _display.toggleMode(display)
-    
-    this.setData({ display })
+  toggleMode: function (e) {
+    let display = this.data.display;
+    display = _display.toggleMode(display);
+    this.setData({ display });
   },
 
-  changeFontSize: async function (event) {
+  changeFontSize: function (event) {
     let display = this.data.display
-    let value = event.detail.detail.value
+    let value = event.detail.value
     
     display.fontSize = value
-    display = await _display.update(display)
+    display = _display.update(display)
     
     this.setData({display})
   },
@@ -43,6 +41,15 @@ Page({
   onTap: function (e) {
     let displayInfo = !this.data.displayInfo
     this.setData({ displayInfo })
+  },
+
+  toggleFontContainer: function () {
+    let display = this.data.display
+    
+    display['fontContainer'] = !display['fontContainer']
+    display = _display.update(display)
+
+    this.setData({ display })
   },
 
   // ----- Story Functions -----
@@ -87,12 +94,11 @@ Page({
   // ----- Favorite Functions -----
 
   addFavorite: async function () {    
-    wx.showLoading({ title: 'Adding...' })
-
     let user = this.data.user
     let story = this.data.story
 
     if (user && story) {
+      wx.showLoading({ title: 'Adding...' })
       await _favorite.add(user, story).then(async res => {
         story = await _story.varyFavorites(story, 'add') // (10)
 
@@ -105,7 +111,10 @@ Page({
         this.setData({ story, user })
       })
     } else {
-      wx.showToast({title: 'Please Login'})
+      await _auth.getCurrentUser().then(user => {
+        this.setData({user})
+        this.addFavorite();
+      });
     }
   },
 
@@ -167,7 +176,10 @@ Page({
             this.setData({ user })
             resolve(user)
           })
-        } else resolve(undefined)
+        } else {
+          console.log('No User')
+          resolve(undefined)
+        }
       })
     })
   },

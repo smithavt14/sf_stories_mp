@@ -14,6 +14,20 @@
   wx:if="{{displayInfo}}"
   class="title__area" 
   style="background: {{display.backgroundColor}}; color: {{display.color}}">
+    <view wx:if="{{ display.fontContainer }}" class="font__container">
+      <view class="slider_container">
+        <slider bindchange="changeFontSize" min="20" max="60" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
+      </view>
+    </view>
+    <view class="btn__container">
+      <image bindtap="toggleFontContainer" class="btn" src="/icons/font-{{display.mode}}.svg"/>
+      <image bindtap="toggleMode" class="btn" src="/icons/mode-{{display.mode}}.svg"/>
+
+      <image wx:if="{{ story.isFavorite }}" bindtap="removeFavorite" class="btn" src="/icons/unfavorite-{{display.mode }}.svg"/>
+      <image wx:else bindtap="addFavorite" class="btn" src="/icons/favorite-{{display.mode}}.svg"/>
+
+      <image class="btn" bindtap="getRandomStory" src="/icons/skip-{{display.mode}}.svg"/>
+    </view>
     <view class="title">{{story.title}}</view>
     <view class="author">{{story.author}}</view>
   </view>

@@ -14,7 +14,7 @@
   style="border-bottom-color: {{display.color}}"
   bindtap="removeFavorite">
     <view>Remove from Favorites</view>
-    <image class="icon" mode="aspectFit" src="/icons/{{display.mode}}_favorited.png"></image>
+    <image class="icon" mode="aspectFit" src="/icons/unfavorite-{{display.mode}}.svg"/>
   </view>
   
   <view 
@@ -23,7 +23,7 @@
   style="border-bottom-color: {{display.color}}"
   bindtap="addFavorite">
     <view>Save to Favorites</view>
-    <image class="icon" mode="aspectFit" src="/icons/{{display.mode}}_not_favorited.png"></image>
+    <image class="icon" mode="aspectFit" src="/icons/favorite-{{display.mode}}.svg"/>
   </view>
 
   <view 
