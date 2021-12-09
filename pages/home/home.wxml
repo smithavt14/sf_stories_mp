@@ -14,7 +14,7 @@
   wx:if="{{displayInfo}}"
   class="title__area" 
   style="background: {{display.backgroundColor}}; color: {{display.color}}">
-    <view wx:if="{{ display.fontContainer }}" class="font__container">
+    <view wx:if="{{ displayFontContainer }}" class="font__container">
       <view class="slider_container">
         <slider bindchange="changeFontSize" min="32" max="56" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
       </view>
@@ -36,21 +36,6 @@
 
 <!-- Top Display Container -->
 <view wx:if="{{!displayMenu && displayInfo && story}}" class="top_container" style="background: {{display.backgroundColor}}; color: {{display.color}}">
-  <view class="menu-btn" bindtap="toggleMenu" style="color: {{display.color}}">Menu</view>
-
+  <image class="menu-btn" bindtap="navigateToProfile" src="/icons/user-{{display.mode}}.svg"/>
   <view class="speed-info" style="color: {{display.color}}">{{story.readSpeed}} minutes</view>
 </view>
-
-<!-- Menu Component -->
-<menu 
-wx:if="{{displayMenu}}" 
-display="{{display}}" 
-story="{{story}}"
-user="{{user}}"
-bind:toggleMenu="toggleMenu" 
-bind:toggleMode="toggleMode" 
-bind:getRandomStory="getRandomStory"
-bind:changeFontSize="changeFontSize"
-bind:navigateToProfile="navigateToProfile"
-bind:addFavorite="addFavorite"
-bind:removeFavorite="removeFavorite"></menu>

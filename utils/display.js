@@ -1,16 +1,19 @@
 // ----- Default Variables ----- //
+const dark = '#232323';
+const light = '#FFFCFC'
+
 const darkMode = {
   mode: 'dark',
-  backgroundColor: '#232323',
-  color: '#FFFCFC',
+  backgroundColor: dark,
+  color: light,
   btn: 'Light Mode',
   fontSize: 32
 }
 
 const lightMode = {
   mode: 'light',
-  backgroundColor: '#FFFCFC',
-  color: '#232323',
+  backgroundColor: light,
+  color: dark,
   btn: 'Dark Mode',
   fontSize: 32
 }

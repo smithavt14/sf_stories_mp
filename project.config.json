@@ -13,6 +13,7 @@
         "coverView": true,
         "nodeModules": true,
         "autoAudits": false,
+        "scopeDataCheck": false,
         "checkInvalidKey": true,
         "checkSiteMap": true,
         "uploadWithSourceMap": true,
@@ -30,8 +31,7 @@
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "minifyWXSS": true,
-        "scopeDataCheck": false
+        "minifyWXSS": true
     },
     "compileType": "miniprogram",
     "libVersion": "2.9.4",

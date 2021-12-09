@@ -1,0 +1,10 @@
+<view class="page__container" style="background: {{display.backgroundColor}}; color: {{display.color}}">
+    <view 
+    wx:for="{{ categories }}" 
+    wx:for-item="category" 
+    data-category="{{category.data}}"
+    class="card__category"
+    style="background-image: url({{category.image}})">
+        <view>{{category.display}}</view>
+    </view>
+</view>

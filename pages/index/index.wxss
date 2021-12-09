@@ -1,0 +1,16 @@
+.card__category {
+    width: 90%;
+    height: 240rpx;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    margin: 24rpx 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40rpx;
+    font-weight: 800;
+    font-family: 'Anurati', Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 2px 2px 4px rgba(0,0,0.75);
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.25);
+}

@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/profile/profile",
     "pages/favorites/favorites",
-    "pages/popular/popular"
+    "pages/popular/popular", 
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

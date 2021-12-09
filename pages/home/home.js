@@ -6,7 +6,8 @@ const _favorite = require('../../utils/favorite.js')
 Page({
   data: {
     displayMenu: false,
-    displayInfo: true
+    displayInfo: true,
+    displayFontContainer: false
     // (1)
   }, 
 
@@ -44,12 +45,11 @@ Page({
   },
 
   toggleFontContainer: function () {
-    let display = this.data.display
+    let displayFontContainer = this.data.displayFontContainer
     
-    display['fontContainer'] = !display['fontContainer']
-    display = _display.update(display)
+    displayFontContainer = !displayFontContainer
 
-    this.setData({ display })
+    this.setData({ displayFontContainer })
   },
 
   // ----- Story Functions -----
