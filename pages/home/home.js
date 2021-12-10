@@ -60,13 +60,15 @@ Page({
     let user = attrs.user ? attrs.user : this.data.user
 
     _story.random().then(async story => {
-
       story = await _story.setReadSpeed(story)
+      story['favorite'] = {}
+
+      story.favorite['count'] = await _favorite.fetchCount(story)
 
       if (user) {
-        let favorite = await _favorite.query(user, story) // (3)
-        story['isFavorite'] = !!favorite
-      } 
+        let favorite = await _favorite.active(user, story) // (3)
+        story.favorite['active'] = !!favorite
+      }
       
       wx.hideLoading()
       this.setData({ story, displayMenu: false }) // (4)
@@ -80,11 +82,14 @@ Page({
     
     _story.fetchWithId(id).then(async story => {
       story = await _story.setReadSpeed(story)
+      story['favorite'] = {}
+
+      story.favorite['count'] = await _favorite.fetchCount(story)
 
       if (user) {
-        let favorite = await _favorite.query(user, story) // (3)
-        story['isFavorite'] = !!favorite
-      } 
+        let favorite = await _favorite.active(user, story) // (3)
+        story.favorite['active'] = !!favorite
+      }
       
       wx.hideLoading()
       this.setData({ story, displayMenu: false }) // (4)
@@ -98,17 +103,18 @@ Page({
     let story = this.data.story
 
     if (user && story) {
-      wx.showLoading({ title: 'Adding...' })
-      await _favorite.add(user, story).then(async res => {
-        story = await _story.varyFavorites(story, 'add') // (10)
 
-        user['favorites'] = await _favorite.fetch(user) // (5)
-        
-        let favorite = await _favorite.query(user, story) // (6)
-        story['isFavorite'] = !!favorite // (7)
-        
-        wx.hideLoading()
-        this.setData({ story, user })
+      await _favorite.add(user, story).then(async res => {
+
+        let count = await _favorite.fetchCount(story)
+
+        if (story.favorite) {
+          story.favorite.active = true 
+          story.favorite.count = count
+        } else {
+          story['favorite'] = { active: true, count }
+        }
+        this.setData({ story })
       })
     } else {
       await _auth.getCurrentUser().then(user => {
@@ -119,36 +125,28 @@ Page({
   },
 
   removeFavorite: async function () {
-    wx.showLoading({title: 'Removing...'})
-
     let user = this.data.user
     let story = this.data.story
 
-    let favorite = await _favorite.query(user, story)
+    if (user && story && story.isFavorite) {
+      await _favorite.remove(user, story).then(async res => {    
+        console.log(res);
 
-    if (user && story && favorite) {
-      await _favorite.remove(favorite).then(async res => {
-        story = await _story.varyFavorites(story, 'subtract') // (10)
+        let count = await _favorite.fetchCount(story)
 
-        user['favorites'] = await _favorite.fetch(user) // (5)
-        
-        let favorite = await _favorite.query(user, story) // (6)
-        
-        story['isFavorite'] = !!favorite // (7)
-        
-        wx.hideLoading()
-        this.setData({ story, user })
+        if (story.favorite) {
+          story.favorite.active = true 
+          story.favorite.count = count
+        } else {
+          story['favorite'] = {
+            active: true, 
+            count
+          }
+        }
+
+        this.setData({ story })
       })
     }
-  },
-
-  fetchFavorites: async function () {
-    let user = this.data.user
-    
-    await _favorite.fetch(user).then(favorites => {
-      user['favorites'] = favorites // (8)
-      this.setData({user})
-    })
   },
 
   // ----- Navigation Functions -----
@@ -171,11 +169,8 @@ Page({
     return new Promise(async resolve => {
       await _auth.getCurrentUser().then(async user => {
         if (user) {
-          await _favorite.fetch(user).then(favorites => {
-            user['favorites'] = favorites
-            this.setData({ user })
-            resolve(user)
-          })
+          this.setData({ user })
+          resolve(user)
         } else {
           console.log('No User')
           resolve(undefined)

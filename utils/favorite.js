@@ -1,12 +1,28 @@
-const fetch = (user) => {
+const fetchAll = (user) => {
   return new Promise(resolve => {
     let query = new wx.BaaS.Query()
 
     query.compare('user', '=', user.id)
 
     let Favorite = new wx.BaaS.TableObject('favorite')
-    Favorite.setQuery(query).limit(100).find().then(res => {
+    Favorite.setQuery(query).find().then(res => {
       resolve(res.data.objects)
+    }, err => {
+      console.log(err)
+      resolve(null)
+    })
+  })
+}
+
+const fetchCount = (story) => {
+  return new Promise(resolve => {
+    let Favorite = new wx.BaaS.TableObject('favorite');
+    let query = new wx.BaaS.Query();
+
+    query.compare('story', '=', story.id)
+
+    Favorite.setQuery(query).count().then(res => {
+      resolve(res)
     }, err => {
       console.log(err)
       resolve(null)
@@ -18,24 +34,34 @@ const add = (user, story) => {
   return new Promise(resolve => {
     let Favorite = new wx.BaaS.TableObject('favorite')
     let favorite = Favorite.create()
-
-    let fields = {
+    let data = {
       user: user.id,
       story: story.id
     }
 
-    favorite.set(fields).save().then(res => {
+    console.log(data);
+
+    favorite.set(data).save().then(res => {
+      console.log(res)
       resolve(res)
     }, err => {
+      console.log(err)
       resolve(err)
     })
   })
 }
 
-const remove = (favorite) => {
+
+
+const remove = (user, story) => {
   return new Promise(resolve => {
     let Favorite = new wx.BaaS.TableObject('favorite')
-    Favorite.delete(favorite.id).then(res => {
+    let query = new wx.BaaS.Query();
+    
+    query.compare('story', '=', story.id)
+    query.compare('user', '=', user.id)
+
+    Favorite.delete(query).then(res => {
       resolve(res)
     }, err => {
       resolve(err)
@@ -43,20 +69,20 @@ const remove = (favorite) => {
   })
 }
 
-const query = async (user, story) => {
-  let favorites = user.favorites
-  story.id = story.id
-
+const active = async (user, story) => {
   return new Promise(resolve => {
-    if (favorites.length !== 0) {
-      favorites.forEach((favorite) => {
-        if (favorite.story.id === story.id) {
-          resolve(favorite)
-        }
-      })
-      resolve(null)
-    } else resolve(null)
+    let Favorite = new wx.BaaS.TableObject('favorite')
+    let query = new wx.BaaS.Query();
+    
+    query.compare('story', '=', story.id)
+    query.compare('user', '=', user.id)
+
+    Favorite.setQuery(query).count().then(res => {
+      resolve(res)
+    }, err => {
+      resolve(err)
+    })
   })
 }
 
-module.exports = { fetch, add, remove, query}
+module.exports = { fetchAll, add, remove, active, fetchCount}
