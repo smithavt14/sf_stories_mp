@@ -10,22 +10,19 @@
   position: fixed;
   top: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   z-index: 200;
+  padding: 60rpx 5% 0 5%;
+  box-sizing: border-box;
 }
 
 .top_container .menu-btn {
   width: 64rpx;
   height: 64rpx;
-  position: fixed;
-  top: 6%;
-  left: 5%;
 }
 
 .top_container .speed-info {
-  position: fixed;
-  top: 5%;
   height: 100rpx;
   display: flex;
   align-items: center;
@@ -55,6 +52,25 @@
   display: flex;
   justify-content: space-around;
   padding-bottom: 40rpx;
+}
+
+.title__area > .btn__container > .box-favorite {
+  display: flex;
+  flex-grow: 0;
+  color: white;
+  align-items: center;
+}
+
+.title__area > .btn__container > .box-favorite > .count {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-left: 12rpx;
+  opacity: 0.8;
+}
+
+.title__area > .btn__container > .box-favorite > .btn {
+  width: 64rpx;
+  height: 64rpx;
 }
 
 .title__area > .btn__container > .btn {

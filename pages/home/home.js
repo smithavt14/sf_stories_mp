@@ -7,7 +7,9 @@ Page({
   data: {
     displayMenu: false,
     displayInfo: true,
-    displayFontContainer: false
+    displayFontContainer: false,
+    titleAnimation: {},
+    headerAnimation: {}
     // (1)
   }, 
 
@@ -41,6 +43,7 @@ Page({
 
   onTap: function (e) {
     let displayInfo = !this.data.displayInfo
+    this.titleAnimation()
     this.setData({ displayInfo })
   },
 
@@ -50,6 +53,26 @@ Page({
     displayFontContainer = !displayFontContainer
 
     this.setData({ displayFontContainer })
+  },
+
+  titleAnimation: function () {
+    let displayInfo = this.data.displayInfo
+
+    let titleAnimation = wx.createAnimation({ duration: 500, timingFunction: 'ease' });
+    let headerAnimation = wx.createAnimation({ duration: 500, timingFunction: 'ease' });
+    
+    if (displayInfo) {
+      titleAnimation.translateY(300).step()
+      headerAnimation.translateY(-300).step()
+    } else {
+      titleAnimation.translateY(0).step()
+      headerAnimation.translateY(0).step()
+    }
+
+    this.setData({
+      titleAnimation: titleAnimation.export(), 
+      headerAnimation: headerAnimation.export() 
+    })
   },
 
   // ----- Story Functions -----
@@ -128,20 +151,15 @@ Page({
     let user = this.data.user
     let story = this.data.story
 
-    if (user && story && story.isFavorite) {
-      await _favorite.remove(user, story).then(async res => {    
-        console.log(res);
-
+    if (user && story && story.favorite.active) {
+      await _favorite.remove(user, story).then(async res => {
         let count = await _favorite.fetchCount(story)
 
         if (story.favorite) {
-          story.favorite.active = true 
+          story.favorite.active = false
           story.favorite.count = count
         } else {
-          story['favorite'] = {
-            active: true, 
-            count
-          }
+          story['favorite'] = { active: false, count }
         }
 
         this.setData({ story })

@@ -38,20 +38,15 @@ const add = (user, story) => {
       user: user.id,
       story: story.id
     }
-
-    console.log(data);
-
+    
     favorite.set(data).save().then(res => {
-      console.log(res)
       resolve(res)
     }, err => {
-      console.log(err)
+      console.log("error msg -->", err)
       resolve(err)
     })
   })
 }
-
-
 
 const remove = (user, story) => {
   return new Promise(resolve => {
