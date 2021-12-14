@@ -34,6 +34,7 @@
   margin: 20rpx 0;
   font-family: serif;
   text-align: justify;
+  line-height: 125%;
 }
 
 .title__area {
@@ -89,7 +90,6 @@
 }
 
 .title__area .author {
-  /* width: 90%; */
   font-size: 32rpx;
   text-align: center;
 }
@@ -112,11 +112,11 @@
 }
 
 .font__container > .family__container > .serif {
-  font-family: serif;
+  font-family: Georgia, 'Times New Roman', Times, serif
 }
 
 .font__container > .family__container > .sans-serif {
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .font__container > .family__container > .mono {

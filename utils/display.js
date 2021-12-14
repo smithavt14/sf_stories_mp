@@ -40,9 +40,11 @@ const fetch = () => {
 
 const toggleMode = (display) => {
   let fontSize = display.fontSize
+  let fontFamily = display.fontFamily
 
   display = display.mode === 'light' ? darkMode : lightMode
   display.fontSize = fontSize
+  display.fontFamily = fontFamily
 
   wx.setStorageSync('display', display);
 
