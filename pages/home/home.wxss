@@ -95,10 +95,35 @@
 }
 
 .font__container {
-  height: 150rpx;
+  padding-bottom: 32rpx;
   width: 90%;
-  /* display: flex; */
-  align-items: center;
-  justify-content: space-between;
 }
 
+.font__container > .family__container {
+  display: flex;
+  justify-content: space-around;
+  font-size: 64rpx;
+  padding-bottom: 32rpx;
+  align-items: center;
+}
+
+.font__container > .family__container .font {
+  opacity: 0.5;
+}
+
+.font__container > .family__container > .serif {
+  font-family: serif;
+}
+
+.font__container > .family__container > .sans-serif {
+  font-family: sans-serif;
+}
+
+.font__container > .family__container > .mono {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.font__container > .family__container > .active {
+  /* font-weight: bold; */
+  opacity: 1;
+}

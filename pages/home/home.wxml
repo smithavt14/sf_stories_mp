@@ -3,7 +3,7 @@
   <!-- Story Content -->
   <view class="story_container" bindtap="onTap">
     <view wx:for="{{story.content}}">
-      <view class="content" style="font-size: {{display.fontSize}}rpx">
+      <view class="content" style="font-size: {{display.fontSize}}rpx; font-family: {{display.fontFamily.name}}">
         {{item}}
       </view>
     </view>
@@ -15,9 +15,12 @@
   style="background: {{display.backgroundColor}}; color: {{display.color}}"
   animation="{{titleAnimation}}">
     <view wx:if="{{ displayFontContainer }}" class="font__container">
-      <view class="slider_container">
-        <slider bindchange="changeFontSize" min="32" max="56" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
+      <view class="family__container">
+        <view class="font serif {{display.fontFamily.active === 0 ? 'active' : ''}}" data-font="0" bindtap="changeFont">Aa</view>
+        <view class="font sans-serif {{display.fontFamily.active === 1 ? 'active' : ''}}" data-font="1" bindtap="changeFont">Aa</view>
+        <view class="font mono {{display.fontFamily.active === 2 ? 'active' : ''}}" data-font="2" bindtap="changeFont">Aa</view>
       </view>
+      <slider bindchange="changeFontSize" min="32" max="56" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
     </view>
     <view class="btn__container">
       <image bindtap="toggleFontContainer" class="btn" src="/icons/font-{{display.mode}}.svg"/>

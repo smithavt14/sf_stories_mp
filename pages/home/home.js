@@ -41,6 +41,18 @@ Page({
     this.setData({ displayMenu })
   },
 
+  changeFont: function (e) {
+    let display = this.data.display
+    let fonts = ["serif", "sans-serif", "'Courier New', Courier, monospace"]
+    let active = parseInt(e.currentTarget.dataset.font)
+    let name = fonts[active]
+
+    display.fontFamily = { active, name }
+      
+    display = _display.update(display)
+    this.setData({display})
+  },
+
   onTap: function (e) {
     let displayInfo = !this.data.displayInfo
     this.titleAnimation()
@@ -49,9 +61,7 @@ Page({
 
   toggleFontContainer: function () {
     let displayFontContainer = this.data.displayFontContainer
-    
     displayFontContainer = !displayFontContainer
-
     this.setData({ displayFontContainer })
   },
 
@@ -199,7 +209,7 @@ Page({
 
   // ----- LifeCycle Functions -----
   
-  onLoad: async function (options) {
+  onLoad: async function (options) {    
     this.fetchDisplay()
 
     if (options.id) {

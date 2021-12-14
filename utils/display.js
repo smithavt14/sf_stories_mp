@@ -7,7 +7,11 @@ const darkMode = {
   backgroundColor: dark,
   color: light,
   btn: 'Light Mode',
-  fontSize: 32
+  fontSize: 32,
+  fontFamily: {
+    active: 0, 
+    name: 'serif'
+  }
 }
 
 const lightMode = {
@@ -15,7 +19,11 @@ const lightMode = {
   backgroundColor: light,
   color: dark,
   btn: 'Dark Mode',
-  fontSize: 32
+  fontSize: 32,
+  fontFamily: {
+    active: 0, 
+    name: 'serif'
+  }
 }
 
 // ----- Functions ----- //
