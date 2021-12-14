@@ -23,17 +23,17 @@
       <slider bindchange="changeFontSize" min="32" max="56" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
     </view>
     <view class="btn__container">
-      <image bindtap="toggleFontContainer" class="btn" src="/icons/font-{{display.mode}}.svg"/>
-      <image bindtap="toggleMode" class="btn" src="/icons/mode-{{display.mode}}.svg"/>
+      <image bindtap="toggleFontContainer" class="btn" src="/icons/font-{{display.btn}}.svg"/>
+      <image bindtap="toggleMode" class="btn" src="/icons/mode-{{display.btn}}.svg"/>
 
       <view class="box-favorite">
-        <image wx:if="{{ story.favorite.active }}" bindtap="removeFavorite" class="btn" src="/icons/unfavorite-{{display.mode }}.svg"/>
-        <image wx:else bindtap="addFavorite" class="btn" src="/icons/favorite-{{display.mode}}.svg"/>
+        <image wx:if="{{ story.favorite.active }}" bindtap="removeFavorite" class="btn" src="/icons/unfavorite-{{display.btn}}.svg"/>
+        <image wx:else bindtap="addFavorite" class="btn" src="/icons/favorite-{{display.btn}}.svg"/>
         <view class="count" style="color: {{display.color}}">{{story.favorite.count}}</view>
       </view>
       
 
-      <image class="btn" bindtap="getRandomStory" src="/icons/skip-{{display.mode}}.svg"/>
+      <image class="btn" bindtap="getRandomStory" src="/icons/skip-{{display.btn}}.svg"/>
     </view>
     <view class="title">{{story.title}}</view>
     <view class="author">{{story.author}}</view>
@@ -46,7 +46,7 @@
 class="top_container" 
 style="background: {{display.backgroundColor}}; color: {{display.color}}"
 animation="{{headerAnimation}}">
-  <image class="menu-btn" bindtap="navigateToProfile" src="/icons/user-{{display.mode}}.svg"/>
+  <image class="menu-btn" bindtap="navigateToProfile" src="/icons/user-{{display.btn}}.svg"/>
   <view class="speed-info" style="color: {{display.color}}">{{story.readSpeed}} minutes</view>
   <view style="color: {{display.backgroundColor}}; width: 64rpx;">-</view>
 </view>

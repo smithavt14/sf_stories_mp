@@ -1,28 +1,41 @@
 // ----- Default Variables ----- //
 const dark = '#232323';
-const light = '#FFFCFC'
+const light = '#FFFCFC';
+const sepia = '#F5F1E4';
 
-const darkMode = {
-  mode: 'dark',
-  backgroundColor: dark,
-  color: light,
-  btn: 'Light Mode',
-  fontSize: 32,
-  fontFamily: {
-    active: 0, 
-    name: 'serif'
-  }
-}
-
-const lightMode = {
-  mode: 'light',
-  backgroundColor: light,
-  color: dark,
-  btn: 'Dark Mode',
-  fontSize: 32,
-  fontFamily: {
-    active: 0, 
-    name: 'serif'
+const modes = {
+  dark: {
+    name: 'dark',
+    backgroundColor: dark,
+    color: light,
+    btn: 'dark',
+    fontSize: 48,
+    fontFamily: {
+      active: 0, 
+      name: 'serif'
+    }
+  },
+  light: {
+    name: 'light',
+    backgroundColor: light,
+    color: dark,
+    btn: 'light',
+    fontSize: 48,
+    fontFamily: {
+      active: 0, 
+      name: 'serif'
+    }
+  }, 
+  sepia: {
+    name: 'sepia',
+    backgroundColor: sepia,
+    color: dark,
+    btn: 'light',
+    fontSize: 48,
+    fontFamily: {
+      active: 0, 
+      name: 'serif'
+    }
   }
 }
 
@@ -32,8 +45,8 @@ const fetch = () => {
     let display = wx.getStorageSync('display');
     if (display) resolve(display);
     else {
-      wx.setStorageSync('display', lightMode);
-      resolve(lightMode);
+      wx.setStorageSync('display', modes.dark);
+      resolve(modes.dark);
     }
   })
 }
@@ -41,13 +54,21 @@ const fetch = () => {
 const toggleMode = (display) => {
   let fontSize = display.fontSize
   let fontFamily = display.fontFamily
+  let name = display.name
 
-  display = display.mode === 'light' ? darkMode : lightMode
+  if (name === 'dark') { 
+    name = 'light' 
+  } else if (name === 'light') {
+    name = 'sepia'
+  } else if (name === 'sepia') {
+    name = 'dark'
+  }
+
+  display = modes[name]
   display.fontSize = fontSize
   display.fontFamily = fontFamily
 
   wx.setStorageSync('display', display);
-
   return(display);
 }
 
