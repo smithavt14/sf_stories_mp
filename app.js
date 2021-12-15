@@ -16,6 +16,11 @@ App({
       source: 'url("https://cloud-minapp-32145.cloud.ifanrusercontent.com/1mwugSJIbIuSUEiT.ttf")',
       success: res => console.log(res)
     })
+    wx.loadFontFace({
+      family: 'Anurati',
+      source: 'url("https://cloud-minapp-32145.cloud.ifanrusercontent.com/1lkpLHvc4hMIYAQm.otf")',
+      success: res => console.log(res)
+    })
   },
 
   onLaunch: function () {

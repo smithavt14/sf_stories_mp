@@ -1,4 +1,4 @@
-<view class="page__container" style="background: {{display.backgroundColor}}; color: {{display.color}}">
+<view class="page__container" style="background: {{display.backgroundColor}}; color: {{display.color}}; font-family: 'Anurati'">
   
   <!-- User Information -->
   <view class="user_container">
@@ -15,21 +15,18 @@
     <view
     class="container" 
     style="border-bottom-color: {{display.color}}"
-    bindtap="navigateToFavorites">Favorites</view>
-    
-    <view 
-    class="container" 
-    style="border-bottom-color: {{display.color}}">Total Reading Time</view>
-    
-    <view 
-    class="container" 
-    style="border-bottom-color: {{display.color}}"
-    bindtap="navigateToPopular">Community Favorites</view>
+    bindtap="navigateToFavorites">
+    <view>Favorites</view>
+    <image class="icon" src="/icons/unfavorite-{{display.btn}}.svg"/>
+    </view>
 
     <view 
     class="container" 
     style="border-bottom-color: {{display.color}}"
-    bindtap="navigateToHome">Continue Reading</view>
+    bindtap="navigateToHome">
+    <view>Continue Reading</view>  
+    <image class="icon" style="height: 64rpx; width: 64rpx;" src="/icons/skip-{{display.btn}}.svg"/>
+    </view>
 
     <view 
     wx:if="{{user}}"

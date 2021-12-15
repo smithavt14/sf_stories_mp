@@ -112,15 +112,15 @@
 }
 
 .font__container > .family__container > .serif {
-  font-family: Georgia, 'Times New Roman', Times, serif
+  font-family: 'Georgia', 'Times New Roman', 'Times', 'serif'
 }
 
 .font__container > .family__container > .sans-serif {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
 }
 
 .font__container > .family__container > .mono {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Courier New', 'Courier', 'monospace';
 }
 
 .font__container > .family__container > .active {

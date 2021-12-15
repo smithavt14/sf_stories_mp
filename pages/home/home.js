@@ -43,7 +43,7 @@ Page({
 
   changeFont: function (e) {
     let display = this.data.display
-    let fonts = ["'Times New Roman', Times, serif", "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", "'Courier New', Courier, monospace"]
+    let fonts = ["'Georgia', 'Times New Roman', 'Times', 'serif'", "'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'", "'Courier New', 'Courier', monospace"]
     let active = parseInt(e.currentTarget.dataset.font)
     let name = fonts[active]
 
