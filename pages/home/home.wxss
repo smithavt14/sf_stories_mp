@@ -108,7 +108,7 @@
 }
 
 .font__container > .family__container .font {
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
 .font__container > .family__container > .serif {

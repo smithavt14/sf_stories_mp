@@ -8,6 +8,7 @@ const modes = {
     name: 'dark',
     backgroundColor: dark,
     color: light,
+    highlight:  '#05BEF5',
     btn: 'dark',
     fontSize: 48,
     fontFamily: {
@@ -19,6 +20,7 @@ const modes = {
     name: 'light',
     backgroundColor: light,
     color: dark,
+    highlight: '#FF00B1',
     btn: 'light',
     fontSize: 48,
     fontFamily: {
@@ -30,6 +32,7 @@ const modes = {
     name: 'sepia',
     backgroundColor: sepia,
     color: dark,
+    highlight: '#C09944',
     btn: 'light',
     fontSize: 48,
     fontFamily: {

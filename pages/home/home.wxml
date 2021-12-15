@@ -20,7 +20,7 @@
         <view class="font sans-serif {{display.fontFamily.active === 1 ? 'active' : ''}}" data-font="1" bindtap="changeFont">Aa</view>
         <view class="font mono {{display.fontFamily.active === 2 ? 'active' : ''}}" data-font="2" bindtap="changeFont">Aa</view>
       </view>
-      <slider bindchange="changeFontSize" min="32" max="56" backgroundColor="#D9D6D6" activeColor="{{display.color}}" block-size="20" value="{{display.fontSize}}"  show-value/>
+      <slider bindchange="changeFontSize" min="32" max="56" backgroundColor="#D9D6D6" activeColor="{{display.highlight}}" block-size="20" value="{{display.fontSize}}"  show-value/>
     </view>
     <view class="btn__container">
       <image bindtap="toggleFontContainer" class="btn" src="/icons/font-{{display.btn}}.svg"/>
