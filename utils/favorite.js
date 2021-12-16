@@ -5,7 +5,7 @@ const fetchAll = (user) => {
     query.compare('user', '=', user.id)
 
     let Favorite = new wx.BaaS.TableObject('favorite')
-    Favorite.setQuery(query).find().then(res => {
+    Favorite.setQuery(query).expand(['story']).limit(100).find().then(res => {
       resolve(res.data.objects)
     }, err => {
       console.log(err)

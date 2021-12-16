@@ -15,17 +15,37 @@ Page({
     this.setData({ stories })
   },
 
+  // ----- Favorite Functions -----
+
+  fetchAllFavorites: async function (user) {
+    return new Promise(async resolve => {
+      await _favorite.fetchAll(user).then(async favorites => {
+        await this.formatDate(favorites)
+        this.setData({ user, favorites })
+        resolve(user)
+      })
+    })
+  },
+
+  formatDate: function (favorites) {
+    return new Promise(resolve => {
+      let sorted_favorites = favorites.sort((a, b) => {return b.created_at - a.created_at})
+      
+      sorted_favorites.forEach(favorite => {
+        let options = {year: 'numeric', month: 'long', day: 'numeric' }
+        let date = new Date(favorite.created_at * 1000)
+        favorite['created_at'] = date.toLocaleDateString('en-US', options)
+      })
+      resolve(sorted_favorites)
+    })
+  },
+
   // ----- Auth Functions -----
   getCurrentUser: function () {
     return new Promise(async resolve => {
       await _auth.getCurrentUser().then(async user => {
-        if (user) {
-          await _favorite.fetch(user).then(favorites => {
-            user['favorites'] = favorites
-            this.setData({ user })
-            resolve(user)
-          })
-        } else resolve(undefined)
+        if (user) resolve(user)
+        else resolve(undefined)
       })
     })
   },
@@ -33,7 +53,6 @@ Page({
   // ----- Display Functions -----
   fetchDisplay: async function () {
     let display = await _display.fetch()
-    
     this.setData({ display })
   },
 
@@ -53,7 +72,7 @@ Page({
   onShow: function () {
     this.fetchDisplay()
     this.getCurrentUser().then((user) => {
-      if (user) this.getAllStories(user)
+      if (user) this.fetchAllFavorites(user)
     })
   }
 })

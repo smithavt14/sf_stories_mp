@@ -3,16 +3,15 @@ class="page__container"
 style="background: {{display.backgroundColor}}; color: {{display.color}}; padding-bottom: 100rpx; padding-top: 200rpx">
   
   <!-- Information Containers -->
-  <block wx:for="{{stories}}">
+  <block wx:for="{{favorites}}">
     <view
     class="container" 
     style="border-bottom-color: {{display.color}}"
     bindtap="navigateToStory"
     data-id="{{item.id}}">
-      <view style="flex-grow: 1">
-        <view class="title">{{ item.title }}</view>
-        <view class="author">{{ item.author }}</view>
-      </view>
+      <view class="title">{{ item.story.title }}</view>
+      <view class="author">{{ item.story.author }}</view>
+      <view class="date">{{item.created_at}}</view>
     </view>
   </block>
 
