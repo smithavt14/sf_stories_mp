@@ -21,5 +21,4 @@ style="background: {{display.backgroundColor}}; color: {{display.color}}; paddin
   class="menu-btn" 
   bindtap="navigateBack" 
   style="color: {{display.color}}">Back</view>
-
 </view>

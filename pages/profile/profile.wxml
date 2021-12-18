@@ -1,4 +1,4 @@
-<view class="page__container" style="background: {{display.backgroundColor}}; color: {{display.color}}; font-family: 'Anurati'">
+<view class="page__container" style="background: {{display.backgroundColor}}; color: {{display.color}}">
   
   <!-- User Information -->
   <view class="user_container">
@@ -31,11 +31,20 @@
     </view>
 
     <view 
+    class="container" 
+    style="border-bottom-color: {{display.color}}"
+    bindtap="navigateToCommunity"
+    animation="{{animation[3]}}">
+    <view>Join the Community</view>
+    <image class="icon" src="/icons/community-{{display.btn}}.svg"/>
+    </view>
+
+    <view 
     wx:if="{{user}}"
     class="container" 
     style="border-bottom-color: {{display.color}}"
     bindtap="logout"
-    animation="{{animation[3]}}">Logout</view>
+    animation="{{animation[4]}}">Logout</view>
   </block>
 
   <!-- Top Back Button -->

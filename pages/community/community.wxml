@@ -1,0 +1,18 @@
+<view 
+class="page__container" 
+style="background: {{display.backgroundColor}}; color: {{display.color}}; padding-bottom: 100rpx; padding-top: 200rpx">
+
+<view class="header">Join Us!</view>
+<view class="body">Chat about your favorite stories, request new stories, and provide feedback to keep growing this community of Science Fiction fans.</view>
+<view class="body">Add our WeChat ID below to join.</view>
+<view 
+class="wechatID"
+style="background: {{display.color}}; color: {{display.backgroundColor}}"
+bindtap="setClipboardData">smithalexvt14</view>
+
+
+<view 
+  class="menu-btn" 
+  bindtap="navigateBack" 
+  style="color: {{display.color}}">Back</view>
+</view>

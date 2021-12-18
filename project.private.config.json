@@ -30,6 +30,12 @@
                     "pathName": "pages/favorites/favorites",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "pages/community/community",
+                    "pathName": "pages/community/community",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

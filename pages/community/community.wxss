@@ -1,0 +1,37 @@
+.menu-btn {
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 600;
+    position: fixed;
+    top: 5%;
+    left: 5%;
+  }
+
+  .page__container > .header {
+    font-size: 64rpx;
+    font-weight: bold;
+    box-sizing: border-box;
+    margin: 32rpx 0;
+  }
+
+  .page__container > .body {
+    padding: 0 5%;
+    text-align: justify;
+    margin: 32rpx 0;
+    box-sizing: border-box;
+  }
+
+  .page__container > .wechatID {
+    margin: 32rpx 0;
+    width: 90%;
+    padding: 5%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+  }

@@ -20,7 +20,7 @@ Page({
     let animation = []
     let delay = 0
     
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 0; i <= 4; i++) {
       animation[i] = wx.createAnimation({ delay, duration: 1000, timingFunction: 'ease' })
       animation[i].translateY(0).step()
       delay += 250
@@ -34,6 +34,15 @@ Page({
   navigateToHome: function () {
     wx.redirectTo({
       url: '/pages/home/home'
+    })
+  },
+
+  navigateToCommunity: function () {
+
+    wx.navigateTo({
+      url: '/pages/community/community',
+      success: (res) => console.log(res),
+      fail: (err) => console.log(err)
     })
   },
 
