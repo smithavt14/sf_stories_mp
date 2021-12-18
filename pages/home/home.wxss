@@ -67,6 +67,7 @@
   font-weight: bold;
   margin-left: 12rpx;
   opacity: 0.8;
+  width: 16rpx;
 }
 
 .title__area > .btn__container > .box-favorite > .btn {
