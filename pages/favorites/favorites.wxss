@@ -7,6 +7,7 @@
   justify-content: center;
   text-align: left;
   padding: 32rpx 0;
+  -webkit-transform: translateY(1000px);
 }
 
 .container > .title {

@@ -2,7 +2,13 @@ const _auth = require('../../utils/auth.js')
 const _display = require('../../utils/display.js')
 
 Page({
-  data: {},
+  data: {
+    animation: {
+      block1: {},
+      block2: {},
+      block3: {}
+    }
+  },
 
   // ----- Display Functions -----
   fetchDisplay: async function () {
@@ -10,10 +16,31 @@ Page({
     this.setData({display})
   },
 
+  slideInAnimate: function () {
+    let animation = []
+    let delay = 0
+    
+    for (let i = 0; i <= 3; i++) {
+      animation[i] = wx.createAnimation({ delay, duration: 1000, timingFunction: 'ease' })
+      animation[i].translateY(0).step()
+      delay += 250
+    } 
+
+    this.setData({ animation })
+  },
+
   // ----- Navigation Functions -----
 
   navigateToHome: function () {
-    wx.navigateBack({delta: 2})
+    wx.redirectTo({
+      url: '/pages/home/home'
+    })
+  },
+
+  navigateBack: function () {
+    wx.navigateBack({
+      delta: 10,
+    })
   },
 
   navigateToFavorites: function () {
@@ -59,5 +86,9 @@ Page({
   onLoad: function () {
     this.getCurrentUser()
     this.fetchDisplay()
+  },
+
+  onShow: function () {
+    setTimeout(() => { this.slideInAnimate() }, 50)
   }
 })

@@ -56,6 +56,20 @@ Page({
     this.setData({ display })
   },
 
+  slideInAnimate: function () {
+    let favorites = this.data.favorites
+    let animation = []
+    let delay = 0
+    
+    for (let i = 0; i < favorites.length; i++) {
+      animation[i] = wx.createAnimation({ delay, duration: 1000, timingFunction: 'ease' })
+      animation[i].translateY(0).step()
+      delay += 250
+    } 
+
+    this.setData({ animation })
+  },
+
   // ----- Navigation Functions -----
   navigateToStory: function (e) {
     let id = e.currentTarget.dataset.id
@@ -72,7 +86,11 @@ Page({
   onShow: function () {
     this.fetchDisplay()
     this.getCurrentUser().then((user) => {
-      if (user) this.fetchAllFavorites(user)
+      if (user) {
+        this.fetchAllFavorites(user).then(() => {
+          this.slideInAnimate()
+        })
+      }
     })
   }
 })

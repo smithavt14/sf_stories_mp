@@ -21,6 +21,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  -webkit-transform: translateY(1000px); 
 }
 
 .container > .icon {

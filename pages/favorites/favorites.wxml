@@ -3,12 +3,13 @@ class="page__container"
 style="background: {{display.backgroundColor}}; color: {{display.color}}; padding-bottom: 100rpx; padding-top: 200rpx">
   
   <!-- Information Containers -->
-  <block wx:for="{{favorites}}">
+  <block wx:for="{{favorites}}" wx:for-index="index">
     <view
     class="container" 
     style="border-bottom-color: {{display.color}}"
     bindtap="navigateToStory"
-    data-id="{{item.story.id}}">
+    data-id="{{item.story.id}}"
+    animation="{{animation[index]}}">
       <view class="title">{{ item.story.title }}</view>
       <view class="author">{{ item.story.author }}</view>
       <view class="date">{{item.created_at}}</view>
